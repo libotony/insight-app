@@ -103,7 +103,14 @@
                         <b-col lg="2">
                             <strong>Total Score</strong>
                         </b-col>
-                        <b-col lg="10">{{block.totalScore | locale}}</b-col>
+                        <b-col lg="10">{{block.totalScore | locale}} (+{{score | locale}})</b-col>
+                    </b-row>
+                    <hr />
+                    <b-row>
+                        <b-col lg="2">
+                            <strong>Total Quality</strong>
+                        </b-col>
+                        <b-col lg="10">{{block.totalQuality | locale}}{{heavy?' (+1)':''}}</b-col>
                     </b-row>
                     <hr />
                     <b-row>
@@ -166,6 +173,16 @@
                             class="text-monospace text-truncate"
                         >{{block.receiptsRoot}}</b-col>
                     </b-row>
+                    <hr/>
+                    <b-row>
+                        <b-col lg="2">
+                            <strong>BS Root</strong>
+                        </b-col>
+                        <b-col
+                            lg="10"
+                            class="text-monospace text-truncate"
+                        >{{block.backerSignaturesRoot}}</b-col>
+                    </b-row>
                 </template>
                 <template v-else>
                     <div
@@ -191,11 +208,18 @@
 <script lang="ts">
 import Vue from 'vue'
 
+interface Block193 extends Connex.Thor.Block{
+    totalQuality: number
+    backerSignaturesRoot: string
+}
+
 export default Vue.extend({
     data: () => {
         return {
-            block: null as Connex.Thor.Block | null,
+            block: null as Block193 | null,
             error: null as Error | null,
+            score: 0,
+            heavy: false,
             id: ''
         }
     },
@@ -210,11 +234,16 @@ export default Vue.extend({
             this.error = null
 
             try {
-                const block = await this.$connex.thor.block(this.id).get()
+                const block = await this.$connex.thor.block(this.id).get() as Block193
                 if (!block) {
                     this.error = new Error('block not found')
                 } else {
+                    const prev = await this.$connex.thor.block(block.parentID).get() as Block193
                     this.block = block
+                    if (block.totalQuality > prev!.totalQuality){
+                        this.heavy = true
+                    }
+                    this.score = this.block.totalScore - prev.totalScore
                 }
             } catch (err) {
                 this.error = err
