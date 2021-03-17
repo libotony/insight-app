@@ -12,11 +12,11 @@ self.__precacheManifest = [
     "url": "js/chunk-2dde0b94.11949619.js"
   },
   {
-    "revision": "8314e7519f97f914c923",
-    "url": "js/app.0e12de0c.js"
+    "revision": "cb7e1a937653eb3cd6ff",
+    "url": "js/app.9f61aee3.js"
   },
   {
-    "revision": "e19a90c7b65a7d893f0444f7a4f59d3a",
+    "revision": "1a262483e83e8a0226981431cfe99dc5",
     "url": "index.html"
   },
   {
@@ -24,8 +24,8 @@ self.__precacheManifest = [
     "url": "img/vechainstats-logo.ff52cf4c.png"
   },
   {
-    "revision": "8314e7519f97f914c923",
-    "url": "css/app.cd34831c.css"
+    "revision": "cb7e1a937653eb3cd6ff",
+    "url": "css/app.519a27b8.css"
   },
   {
     "revision": "94950714edb823ff37d085ed03466498",
