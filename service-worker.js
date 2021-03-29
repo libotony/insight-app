@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "precache-manifest.d515d047c8aaaa942ade1103a0ec381e.js"
+  "precache-manifest.b084b0b1fe26f453d42201dcd0940068.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "insight-app"});
